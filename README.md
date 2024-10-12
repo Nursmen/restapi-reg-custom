@@ -1,24 +1,23 @@
-# REST API Registration Custom
+# Django REST API Registration Custom
 
-This repository provides a custom implementation of a REST API for user registration and management. It is built using **FastAPI** and includes features such as user registration, login, and token-based authentication.
+This repository contains a custom implementation of a Django-based REST API for user registration and authentication. It uses **Django Rest Framework (DRF)** and includes features such as user registration, login, and token-based authentication.
 
 ## Features
 
 - User registration with validation
 - Token-based authentication (JWT)
 - User login functionality
+- Django Rest Framework (DRF) powered API
 - Customizable registration logic
-- Lightweight and fast API with FastAPI
 
 ## Requirements
 
 To run this project, ensure you have the following installed:
 
 - Python 3.7+
-- FastAPI
-- Uvicorn
-- SQLAlchemy (for database management)
-- JWT (for token management)
+- Django
+- Django Rest Framework (DRF)
+- Simple JWT for JWT token management
 
 You can install the dependencies by running:
 
@@ -53,10 +52,22 @@ pip install -r requirements.txt
    pip install -r requirements.txt
    ```
 
-5. Run the application using Uvicorn:
+5. Set up the database by running migrations:
 
    ```bash
-   uvicorn main:app --reload
+   python manage.py migrate
+   ```
+
+6. Create a superuser to access the Django admin panel:
+
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. Run the Django development server:
+
+   ```bash
+   python manage.py runserver
    ```
 
    The API will be available at `http://127.0.0.1:8000`.
@@ -65,16 +76,16 @@ pip install -r requirements.txt
 
 | Endpoint           | Method | Description                     |
 |--------------------|--------|---------------------------------|
-| `/register`        | POST   | Register a new user             |
-| `/login`           | POST   | Login and receive a JWT token   |
-| `/users/me`        | GET    | Retrieve the logged-in user's info |
+| `/api/register/`   | POST   | Register a new user             |
+| `/api/login/`      | POST   | Login and receive a JWT token   |
+| `/api/users/me/`   | GET    | Retrieve the logged-in user's info |
 
 ## Example Requests
 
 ### Register a new user
 
 ```http
-POST /register
+POST /api/register/
 Content-Type: application/json
 {
   "username": "newuser",
@@ -86,7 +97,7 @@ Content-Type: application/json
 ### Login
 
 ```http
-POST /login
+POST /api/login/
 Content-Type: application/json
 {
   "username": "newuser",
@@ -106,7 +117,7 @@ Response:
 ### Get User Info
 
 ```http
-GET /users/me
+GET /api/users/me/
 Authorization: Bearer <access_token>
 ```
 
@@ -116,4 +127,4 @@ Feel free to submit issues or pull requests if you'd like to contribute to this 
 
 ## License
 
-This project is licensed under the NO License.
+This project is licensed under the NO License
